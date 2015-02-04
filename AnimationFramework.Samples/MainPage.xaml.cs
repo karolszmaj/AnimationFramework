@@ -1,0 +1,65 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Net;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using AnimationFramework.Samples.Resources;
+
+namespace AnimationFramework.Samples
+{
+    public partial class MainPage : PhoneApplicationPage, INotifyPropertyChanged
+    {
+        private bool isVibile;
+
+        public bool IsVisible
+        {
+            get { return isVibile; }
+            set { isVibile = value; OnPropertyChanged();}
+        }
+
+        // Constructor
+        public MainPage()
+        {
+            InitializeComponent();
+            DataContext = this;
+            // Sample code to localize the ApplicationBar
+            //BuildLocalizedApplicationBar();
+        }
+
+        // Sample code for building a localized ApplicationBar
+        //private void BuildLocalizedApplicationBar()
+        //{
+        //    // Set the page's ApplicationBar to a new instance of ApplicationBar.
+        //    ApplicationBar = new ApplicationBar();
+
+        //    // Create a new button and set the text value to the localized string from AppResources.
+        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
+        //    appBarButton.Text = AppResources.AppBarButtonText;
+        //    ApplicationBar.Buttons.Add(appBarButton);
+
+        //    // Create a new menu item with the localized string from AppResources.
+        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
+        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
+        //}
+
+        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged(this,new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void UIElement_OnTap(object sender, GestureEventArgs e)
+        {
+            IsVisible = !IsVisible;
+        }
+    }
+}
